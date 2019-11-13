@@ -66,13 +66,6 @@
         "Start Backend",
         "Start Frontend"
       ]
-    },
-    {
-      "label": "Deploy!! - (block!)",
-      "type": "shell",
-      "command": "${command:appService.Deploy}",
-      "dependsOrder": "sequence",
-      "dependsOn": ["Build App"]
     }
   ]
 }
