@@ -1,0 +1,78 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install dependencies (FrontEnd)",
+      "type": "npm",
+      "script": "install",
+      "path": "frontEnd/"
+    },
+    {
+      "label": "Install dependencies (BackEnd)",
+      "type": "npm",
+      "script": "install",
+      "path": "backEnd/"
+    },
+    {
+      "label": "Publish (FrontEnd)",
+      "type": "npm",
+      "script": "publish",
+      "path": "frontEnd/"
+    },
+    {
+      "label": "Publish (BackEnd)",
+      "type": "npm",
+      "script": "publish",
+      "path": "backEnd/"
+    },
+    {
+      "label": "Install dependencies",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Install dependencies (FrontEnd)",
+        "Install dependencies (BackEnd)"
+      ]
+    },
+    {
+      "label": "Publish",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Publish (FrontEnd)",
+        "Publish (BackEnd)"
+      ]
+    },
+    {
+      "label": "Build App to publish",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Install dependencies",
+        "Publish"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Start Frontend",
+      "type": "npm",
+      "script": "start",
+      "path": "frontEnd/"
+    },
+    {
+      "label": "Start Backend",
+      "type": "npm",
+      "script": "start",
+      "path": "backEnd/"
+    },
+    {
+      "label": "Start App",
+      "dependsOn": [
+        "Start Backend",
+        "Start Frontend"
+      ]
+    }
+  ]
+}
