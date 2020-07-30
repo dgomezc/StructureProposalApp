@@ -1,5 +1,5 @@
 {
-  "name": "reactnode",
+  "name": "reactaspnet",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,7 +22,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js src/**/*.jsx"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "https://localhost:5001",
   "browserslist": [
     ">0.2%",
     "not dead",
