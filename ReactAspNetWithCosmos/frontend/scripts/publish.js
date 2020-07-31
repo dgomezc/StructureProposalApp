@@ -3,7 +3,7 @@ const fse = require("fs-extra");
 const childProcess = require("child_process");
 
 let buildFolder = "./build";
-let publishBuildFolder = "../publish/build";
+let publishBuildFolder = "../publish/ClientApp/build";
 
 //delete folders build & publish/build
 if (fs.existsSync(buildFolder)) {
