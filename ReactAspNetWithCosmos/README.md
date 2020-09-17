@@ -1,7 +1,7 @@
 ﻿## Getting Started
 
-1. Install dependencies using `Install dependencies` task (or use `yarn install` or `npm install` in frontend folder and `dotnet restore` in backend folder).
-2. Start development app using `Start App` task ((or use `yarn start` or `npm start` in frontend and backend folders)).
+1. Install dependencies using `Install dependencies` task (or use `yarn install` or `npm install` frontend folder and `dotnet restore` in backend folder).
+2. Start development app using `Start App` task (or use `yarn start` or `npm start` in frontend folder and `dotnet run` in backend folder).
 
 ## Next Steps
 
@@ -34,7 +34,9 @@ If you selected Azure App Service when creating your project, follow these steps
 
 If you did not select Azure App Service and want to create a new Azure App Service web app, follow these steps:
 
-1. Press `Ctrl + Shift + P` in Windows/Linux or `Shift ⇧ + Command ⌘ + P` in Mac and type/select `Tasks: Run Task`, select `Build App to publish` to build app in `publish` folder.
+1. Press `Ctrl + Shift + P` in Windows/Linux or `Shift ⇧ + Command ⌘ + P` in Mac and type/select `Tasks: Run Task`, and execute the next tasks:
+   - `Install dependencies` to install dependecies in frontend and backend apps.
+   - `Publish` to build apps in `publish` folder.
 2. Once the build is done, press `Ctrl + Shift + P` in Windows/Linux or `Shift ⇧ + Command ⌘ + P` in Mac and type/select `Azure App Service: Create New Web App...` to create a new web app.
    - Select your subscription
    - Enter your web app name
@@ -71,7 +73,7 @@ The back-end is based on [ASP.NET Web API](https://dotnet.microsoft.com/apps/asp
 │ ├── Startup.cs - Register services and configure application
 │ └── WebApi.csproj - Configures Port and HTTP Server
 ├── frontend/ - React front-end
-│ ├── src - React front-end
+│ ├── src
 │ │ ├── components - React components for each page
 │ │ ├── App.jsx - React routing
 │ └─└── index.jsx - React root component

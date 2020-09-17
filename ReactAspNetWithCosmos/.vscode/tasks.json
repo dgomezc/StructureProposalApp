@@ -4,56 +4,28 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Install dependencies (frontend)",
+      "label": "Install dependencies frontend",
       "type": "npm",
       "script": "install",
       "path": "frontend/"
     },
     {
-      "label": "Install dependencies (backend)",
+      "label": "Install dependencies backend",
       "type": "shell",
       "command": "dotnet restore backend"
     },
     {
-      "label": "Publish (frontend)",
+      "label": "Publish frontend",
       "type": "npm",
       "script": "publish",
       "path": "frontend/"
     },
     {
-      "label": "Publish (backend)",
+      "label": "Publish backend",
       "type": "shell",
       "command": "./backend/scripts/publish.sh",
       "windows": {
         "command": "powershell ./backend/scripts/publish.ps1",
-      }
-    },
-    {
-      "label": "Install dependencies",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "Install dependencies (frontend)",
-        "Install dependencies (backend)"
-      ]
-    },
-    {
-      "label": "Publish",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "Publish (frontend)",
-        "Publish (backend)"
-      ]
-    },
-    {
-      "label": "Build App to publish",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "Install dependencies",
-        "Publish"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
       }
     },
     {
@@ -66,6 +38,22 @@
       "label": "Start backend",
       "type": "shell",
       "command": "dotnet run -p backend/."
+    },
+    {
+      "label": "Install dependencies",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Install dependencies frontend",
+        "Install dependencies backend"
+      ]
+    },
+    {
+      "label": "Publish",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Publish frontend",
+        "Publish backend"
+      ]
     },
     {
       "label": "Start App",
