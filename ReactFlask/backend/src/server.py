@@ -1,34 +1,39 @@
+import http
 import os
 import uuid
 
-import constants
 import flask
 import sample_data
+
+PORT = os.environ.get("PORT", 3001)
+ENDPOINT_MASTER_DETAIL = "/api/masterdetail"
+ENDPOINT_LIST = "/api/list"
+ENDPOINT_GRID = "/api/grid"
 
 app = flask.Flask(__name__, static_folder="build")
 
 # MasterDetail Page Endpoint
-@app.route(constants.ENDPOINT_MASTER_DETAIL)
+@app.route(ENDPOINT_MASTER_DETAIL)
 def get_master_detail():
     return flask.jsonify(sample_data.sample_orders)
 
 
 # List Endpoints
-@app.route(constants.ENDPOINT_LIST)
+@app.route(ENDPOINT_LIST)
 def get_list():
     return flask.jsonify(sample_data.sample_list)
 
 
-@app.route(constants.ENDPOINT_LIST, methods=["POST"])
+@app.route(ENDPOINT_LIST, methods=["POST"])
 def add_list_item():
     data = flask.request.get_json()
     list_item = {"id": str(uuid.uuid4()), "text": data["text"]}
     sample_data.sample_list.insert(0, list_item)
     json_response = flask.jsonify(list_item)
-    return flask.make_response(json_response, constants.HTTP_STATUS_201_CREATED)
+    return flask.make_response(json_response, http.HTTPStatus.CREATED)
 
 
-@app.route(constants.ENDPOINT_LIST + "/<string:item_id>", methods=["DELETE"])
+@app.route(ENDPOINT_LIST + "/<string:item_id>", methods=["DELETE"])
 def delete_list_item(item_id):
     item_to_remove = next(
         (item for item in sample_data.sample_list if item["id"] == item_id),
@@ -38,13 +43,13 @@ def delete_list_item(item_id):
         json_response = flask.jsonify(
             {"error": "Could not find an item with the given id"}
         )
-        return flask.make_response(json_response, constants.HTTP_STATUS_404_NOT_FOUND)
+        return flask.make_response(json_response, http.HTTPStatus.NOT_FOUND)
     sample_data.sample_list.remove(item_to_remove)
     return flask.jsonify({"id": item_id, "text": "This comment was deleted"})
 
 
 # Grid Page Endpoint
-@app.route(constants.ENDPOINT_GRID)
+@app.route(ENDPOINT_GRID)
 def get_grid():
     return flask.jsonify(sample_data.sample_orders)
 
@@ -61,11 +66,11 @@ def catch_all(path):
 
 
 # Error Handler
-@app.errorhandler(constants.HTTP_STATUS_404_NOT_FOUND)
+@app.errorhandler(http.HTTPStatus.NOT_FOUND.value)
 def page_not_found():
     json_response = flask.jsonify({"error": "Page not found"})
-    return flask.make_response(json_response, constants.HTTP_STATUS_404_NOT_FOUND)
+    return flask.make_response(json_response, http.HTTPStatus.NOT_FOUND)
 
 
 if __name__ == "__main__":
-    app.run(port=constants.PORT)
+    app.run(port=PORT)

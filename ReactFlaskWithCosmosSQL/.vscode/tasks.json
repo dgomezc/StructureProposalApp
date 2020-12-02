@@ -37,7 +37,7 @@
       "label": "Start backend",
       "type": "shell",
       "command": "python",
-      "args": ["backend/server.py"]
+      "args": ["backend/src/server.py"]
     },
     {
       "label": "Install dependencies",

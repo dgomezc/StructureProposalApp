@@ -1,42 +1,47 @@
+import http
 import os
 
-import constants
 import flask
 import sql.service
 import sample_data
 
+PORT = os.environ.get("PORT", 3001)
+ENDPOINT_MASTER_DETAIL = "/api/masterdetail"
+ENDPOINT_LIST = "/api/list"
+ENDPOINT_GRID = "/api/grid"
+
 app = flask.Flask(__name__, static_folder="build")
 
 # MasterDetail Page Endpoint
-@app.route(constants.ENDPOINT_MASTER_DETAIL)
+@app.route(ENDPOINT_MASTER_DETAIL)
 def get_master_detail():
     return flask.jsonify(sample_data.sample_orders)
 
 
 # List Endpoints
-@app.route(constants.ENDPOINT_LIST)
+@app.route(ENDPOINT_LIST)
 def get_list():
     return flask.jsonify(sql.service.get())
 
 
-@app.route(constants.ENDPOINT_LIST, methods=["POST"])
+@app.route(ENDPOINT_LIST, methods=["POST"])
 def add_list_item():
     json_response = flask.jsonify(sql.service.create())
-    return flask.make_response(json_response, constants.HTTP_STATUS_201_CREATED)
+    return flask.make_response(json_response, http.HTTPStatus.CREATED)
 
 
-@app.route(constants.ENDPOINT_LIST + "/<item_id>", methods=["DELETE"])
+@app.route(ENDPOINT_LIST + "/<item_id>", methods=["DELETE"])
 def delete_list_item(item_id):
     try:
         removed_item = flask.jsonify(sql.service.delete(item_id))
         return removed_item
     except ValueError as ex:
         err_response = flask.jsonify({"error": str(ex)})
-        return flask.make_response(err_response, constants.HTTP_STATUS_404_NOT_FOUND)
+        return flask.make_response(err_response, http.HTTPStatus.NOT_FOUND)
 
 
 # Grid Page Endpoint
-@app.route(constants.ENDPOINT_GRID)
+@app.route(ENDPOINT_GRID)
 def get_grid():
     return flask.jsonify(sample_data.sample_orders)
 
@@ -53,11 +58,11 @@ def catch_all(path):
 
 
 # Error Handler
-@app.errorhandler(constants.HTTP_STATUS_404_NOT_FOUND)
+@app.errorhandler(http.HTTPStatus.NOT_FOUND.value)
 def page_not_found():
     json_response = flask.jsonify({"error": "Page not found"})
-    return flask.make_response(json_response, constants.HTTP_STATUS_404_NOT_FOUND)
+    return flask.make_response(json_response, http.HTTPStatus.NOT_FOUND)
 
 
 if __name__ == "__main__":
-    app.run(port=constants.PORT)
+    app.run(port=PORT)
