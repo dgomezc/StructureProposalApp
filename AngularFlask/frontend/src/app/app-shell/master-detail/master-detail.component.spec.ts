@@ -1,4 +1,4 @@
-﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+﻿import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { MasterDetailComponent } from './master-detail.component';
@@ -10,12 +10,12 @@ describe('MasterDetailComponent', () => {
   let component: MasterDetailComponent;
   let fixture: ComponentFixture<MasterDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [MasterDetailComponent, MasterListComponent, DetailComponent],
       imports: [WarningMessageModule, HttpClientTestingModule]
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MasterDetailComponent);

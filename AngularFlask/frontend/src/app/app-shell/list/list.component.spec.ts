@@ -1,4 +1,4 @@
-﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+﻿import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,7 @@ describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [ListComponent, FormComponent, ListItemComponent],
       imports: [
@@ -23,7 +23,7 @@ describe('ListComponent', () => {
         NgbAlertModule
       ]
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListComponent);

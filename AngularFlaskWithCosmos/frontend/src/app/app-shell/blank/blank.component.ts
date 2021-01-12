@@ -8,5 +8,5 @@
 export class BlankComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

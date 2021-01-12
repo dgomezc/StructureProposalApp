@@ -7,5 +7,5 @@
 })
 export class AppComponent {
 
-  title = 'AngularFlask';
+  title = 'AngularFlaskWithCosmos';
 }

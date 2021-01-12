@@ -4,74 +4,61 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Install dependencies (FrontEnd)",
+      "label": "Install dependencies frontend",
       "type": "npm",
       "script": "install",
-      "path": "frontEnd/"
+      "path": "frontend/"
     },
     {
-      "label": "Install dependencies (BackEnd)",
+      "label": "Install dependencies backend",
       "type": "shell",
       "command": "pip",
       "args": ["install", "-r", "backend/requirements.txt"]
     },
     {
-      "label": "Publish (FrontEnd)",
+      "label": "Publish frontend",
       "type": "npm",
       "script": "publish",
-      "path": "frontEnd/"
+      "path": "frontend/"
     },
     {
-      "label": "Publish (BackEnd)",
+      "label": "Publish backend",
       "type": "shell",
       "command": "python",
       "args": ["backend/scripts/publish.py"]
     },
     {
+      "label": "Start frontend",
+      "type": "npm",
+      "script": "start",
+      "path": "frontend/"
+    },
+    {
+      "label": "Start backend",
+      "type": "shell",
+      "command": "cd backend && flask run -p 3001"
+    },
+    {
       "label": "Install dependencies",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "Install dependencies (FrontEnd)",
-        "Install dependencies (BackEnd)"
+        "Install dependencies frontend",
+        "Install dependencies backend"
       ]
     },
     {
       "label": "Publish",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "Publish (FrontEnd)",
-        "Publish (BackEnd)"
+        "Publish frontend",
+        "Publish backend"
       ]
-    },
-    {
-      "label": "Build App to publish",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "Install dependencies",
-        "Publish"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    },
-    {
-      "label": "Start Frontend",
-      "type": "npm",
-      "script": "start",
-      "path": "frontEnd/"
-    },
-    {
-      "label": "Start Backend",
-      "type": "shell",
-      "command": "python",
-      "args": ["backend/server.py"]
     },
     {
       "label": "Start App",
       "dependsOn": [
-        "Start Backend",
-        "Start Frontend"
+        "Start backend",
+        "Start frontend"
       ]
     }
   ]

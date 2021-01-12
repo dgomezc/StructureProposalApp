@@ -1,4 +1,3 @@
 {
-  "appService.deploySubpath": "publish",
-  "appService.defaultWebAppToDeploy": ""
+    "python.analysis.extraPaths": ["./backend"]
 }

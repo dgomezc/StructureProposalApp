@@ -1,12 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # vscode configuration
-#.vscode/settings.json
-
-# production
-**/build
-/publish
-
+.vscode/settings.json
 
 # testing
 /coverage
@@ -25,6 +20,12 @@ yarn-error.log*
 # build-analytics
 .build-analytics
 
+# production
+/publish
+**/build
+
+#python cache
+**/__pycache__
 
 # dependencies
 **/node_modules

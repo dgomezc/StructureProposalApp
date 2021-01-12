@@ -19,7 +19,7 @@ export class MasterDetailComponent implements OnInit {
 
   constructor(private masterDetailService: MasterDetailService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sampleOrders$ = this.masterDetailService.getMasterDetailItems().pipe(catchError((error) => {
       this.warningMessageText = `Request to get master detail text failed: ${error}`;
       this.warningMessageOpen = true;
@@ -30,11 +30,11 @@ export class MasterDetailComponent implements OnInit {
     }));
   }
 
-  selectSampleOrder(sampleOrder: ISampleOrder) {
+  selectSampleOrder(sampleOrder: ISampleOrder): void {
     this.currentSampleOrder = sampleOrder;
   }
 
-  handleWarningClose(open: boolean) {
+  handleWarningClose(open: boolean): void {
     this.warningMessageOpen = open;
     this.warningMessageText = '';
   }

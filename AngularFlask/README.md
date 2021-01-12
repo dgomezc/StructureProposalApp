@@ -1,73 +1,70 @@
-﻿## Getting Started
+﻿This project was created using [Microsoft Web Template Studio](https://github.com/Microsoft/WebTemplateStudio).
 
-1. Install dependencies using `Install dependencies` task (or use `yarn install` or `npm install` in frontend and backend folders).
-2. Start development app using `Start App` task ((or use `yarn start` or `npm start` in frontend and backend folders)).
+## Getting Started
 
-## Next Steps
+The best way to launch the application is using the [Visual Studio Code Tasks](https://code.visualstudio.com/docs/editor/tasks). In the `vscode/tasks.json` file you can find all the tasks configured for this project.
 
-### Adding a New Page
+To launch a task click on the menu `Terminal > Run Task` and select the task to launch (or press `Ctrl+Shift+P` and choose the `Tasks:Run Task` command).
 
-1. Create a folder in `frontend/src/app/app-shell` with your angular modules.
-2. Add a child route for your page to `frontend/src/app/app.module.ts`.
-3. Add a button to the navigation bar in `frontend/src/app/app-shell/nav-bar/nav-bar.component.html`.
+To run the project:
 
-### Sample Data
-
-Replace the sample data stored in /server/sample_data.py.
-Replace the default images. Sample images are consumed from https://wtsrepository.blob.core.windows.net/sampledata/.
-
-### Deployment
-
-If you selected Azure App Service when creating your project, follow these steps:
-
-1. Press `Ctrl + Shift + P` in Windows/Linux or `Shift ⇧ + Command ⌘ + P` in Mac and type/select `Web Template Studio: Deploy App` to start deploying your app.
-2. After your project is built, click "Deploy" on the window pop up.
-3. Once the deployment is done, click "Browse website" in the notification window on the lower right corner to check out your newly deployed app.
-
-If you did not select Azure App Service and want to create a new Azure App Service web app, follow these steps:
-
-1. Press `Ctrl + Shift + P` in Windows/Linux or `Shift ⇧ + Command ⌘ + P` in Mac and type/select `Tasks: Run Task`, select `Build App to publish` to build app in `publish` folder.
-2. Once the build is done, press `Ctrl + Shift + P` in Windows/Linux or `Shift ⇧ + Command ⌘ + P` in Mac and type/select `Azure App Service: Create New Web App...` to create a new web app.
-   - Select your subscription
-   - Enter your web app name
-   - Select Linux as your OS
-   - Select Node.js 12 LTS for a Node/Express application, Python 3.7 for a Flask application or .Net Core Latest runtime for ASP .NET application.
-2. Once the creation is done, click "Deploy" in the notification window on the lower right corner.
-   - Click "Browse" on the top middle section of your screen and select the "publish" folder within your project
-   - Click "Yes" in the notification window on the lower right corner (build prompt)
-   - Click "Deploy" on the window pop up
-   - Click "Yes" in the notification window on the lower right corner again
-3. Once the deployment is done, click "Browse website" in the notification window on the lower right corner to check out your newly deployed app.
-
-Consider adding authentication and securing back-end API's by following [Azure App Service Security](https://docs.microsoft.com/en-us/azure/app-service/overview-security).
-
-Full documentation for deployment to Azure App Service can be found here: [Deployment Docs](https://github.com/Microsoft/WebTemplateStudio/blob/dev/docs/deployment.md).
+1. Install dependencies using `Install dependencies` task.
+2. Start development app using `Start App` task.
 
 ## File Structure
-
-The front-end is based on [Angular cli "ng"](https://angular.io/cli). It is served on http://localhost:3000/.
-
-The back-end is based on [Flask](https://github.com/pallets/flask). It is served on http://localhost:3001/.
-
 ```
 .
-├── server/ - Flask server that provides API routes and serves front-end
+├── .vscode/ - Visual Studio Code configuration files
+├── backend/ - Backend App
+│ ├── scripts/ - scripts to publish
 │ ├── constants.py - Defines the constants for the endpoints and port
-│ ├── sample_data.py - Contains all sample text data for generate pages
 │ └── server.py - Configures Port and HTTP Server and provides API routes
-├── frontend/ - React front-end
-│ ├── src - Angular front-end
+├── frontend/ - Frontend App
+│ ├── e2e/ - end to end tests
+│ ├── scripts/ - scripts to publish
+│ ├── src/ Angular app folder
 │ │ ├── app - Angular main root module
 │ │ │ ├── app-shell - Angular main components
 │ └─└─└── app.module.ts - Angular root module.
 └── README.md
 ```
 
+### Frontend
+
+The frontend is based on [Angular cli "ng"](https://angular.io/cli).
+
+The most important scripts in the `package.json` are:
+  - start: serves the frontend in development on http://localhost:3000/.
+  - build: Builds the frontend app. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+  - publish: Builds the app for production and moves the output to the `publish` folder.
+  - test: execute the unit tests via [Karma](https://karma-runner.github.io).
+  - e2e: execute the end-to-end tests via [Protractor](http://www.protractortest.org/)
+
+To start the frontend application manually:
+  1. Open a terminal and navigate to the `frontend` folder path.
+  2. Use `yarn install` or `npm install` to install frontend dependencies.
+  3. Use `yarn start` or `npm start` to start frontend app in development.
+
+### Backend
+
+The backend is based on [Flask](https://github.com/pallets/flask).
+
+To start the backend application manually:
+  1. Open a terminal and navigate to the `backend` folder path.
+  2. Use `pip install -r requirements.txt` to install backend dependencies.
+  3. Use `python3 server/server.py || python server/server.py || py -3 server/server.py` to start backend app in development. It is served on http://localhost:3001/
+
+## Deployment
+
+To deploy the application in an Azure App Service follow the deployment instructions:
+
+- [Deployment using Web Template Studio Deploy command](https://github.com/microsoft/WebTemplateStudio/blob/dev/docs/generated-apps/deployment.md)
+
+Consider adding authentication and securing backend API's by following [Azure App Service Security](https://docs.microsoft.com/en-us/azure/app-service/overview-security).
+
 ## Additional Documentation
 
 - Angular Docs - https://angular.io/docs
 - Angular Router - https://angular.io/guide/router
-- Bootstrap CSS - https://getbootstrap.com/
 - Flask - http://flask.pocoo.org/
-
-  This project was created using [Microsoft Web Template Studio](https://github.com/Microsoft/WebTemplateStudio).
+- Bootstrap CSS - https://getbootstrap.com/
